@@ -16,7 +16,7 @@ In this example, over 60,000 arXiv papers are stored in DynamoDB. If you need ac
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/scientific-paper-recommender.git
+   git clone https://github.com/timsankara/scientific-paper-recommender.git
    cd scientific-paper-recommender
    ```
 
