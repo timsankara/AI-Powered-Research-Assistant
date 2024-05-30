@@ -91,7 +91,7 @@ MIT License
 ```
 MIT License
 
-Copyright (c) 2021 Rookih (https://www.rookih.com)
+Copyright (c) 2024 Rookih (https://www.rookih.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit others to whom the Software is provided, to use the Software freely and as they see fit, subject to the following conditions:
 
@@ -103,3 +103,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ---
 
 Feel free to reach out if you need any further assistance or access to the test data.
+But you can also use this repo [ArxivPaperEmbeddings](https://github.com/timsankara/ArxivPaperEmbeddings) to retrieve, embed, and store your own arXiv papers.
