@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from "axios"
 import TextareaAutosize from 'react-textarea-autosize';
 import { Toaster } from 'react-hot-toast';
-import { createInstruction } from "../util/instruct_util"
-import { v4 as uuidv4 } from "uuid"
 import Popover from "../components/Popover/Popover2"
 import { useAuth0 } from '@auth0/auth0-react';
 import { getSimilarItems } from 'util/e_util';
@@ -63,30 +61,6 @@ const Instruct = () => {
 
     const { user } = useAuth0();
 
-    // the instruciton/query is saved to our db
-    const saveInstruction = async (time_taken) => {
-        let data = {
-            query: query,
-            similar_papers: String(similar_papers),
-            user: user !== null ? user.email : "anonymous",
-            time_taken: time_taken / 1000,
-            date: String(new Date()),
-            _id: uuidv4()
-        }
-        await createInstruction(data)
-            .then(res => {
-                window.analytics.track('Paper Search', {
-                    instruction: data,
-                });
-            })
-            .catch(err => {
-                console.log("err: ", err)
-                window.analytics.track('Paper Search Not Saved', {
-                    data: data,
-                })
-            })
-    }
-
     // this function is useful in getting the embeddings from the backend
     async function getEmbeddings(query) {
         try {
@@ -106,7 +80,6 @@ const Instruct = () => {
         e.preventDefault();
         setLoading(true);
         setSimilarPapers([])
-        let start = new Date().getTime(); // start time of execution
 
         // get the embeddings of the query from the backend
         let embeddings = await getEmbeddings(query)
@@ -115,9 +88,6 @@ const Instruct = () => {
         let similar_papers = await getSimilarItems(embeddings.data[0].embedding)
         setSimilarPapers(similar_papers)
         formatAsCitations(similar_papers)
-        let end = new Date().getTime();
-        let time_taken = end - start; // start time of execution
-        saveInstruction(time_taken)
         setLoading(false)
     }
 
@@ -130,7 +100,6 @@ const Instruct = () => {
         }
         setLoading(true);
         setSimilarMedicalPapers([])
-        let start = new Date().getTime();
 
         // get the embeddings of the query from the backend
         let embeddings = await getEmbeddings(medical_query)
@@ -138,9 +107,6 @@ const Instruct = () => {
         // get the top 5 similar papers from the database
         let similar_papers = await getSimilarMedicalPapers(embeddings.data[0].embedding)
         setSimilarMedicalPapers(similar_papers)
-        let end = new Date().getTime();
-        let time_taken = end - start;
-        saveInstruction(time_taken)
         console.log("similar_papers: ", similar_papers)
         // if the user has selected a category then filter the papers by the category
         if (selected_bioarXiv_categories !== []) {
@@ -158,7 +124,6 @@ const Instruct = () => {
                 category: selected_bioarXiv_categories,
                 similar_papers: String(similar_papers),
                 user: user !== null ? user.email : "anonymous",
-                time_taken: time_taken / 1000,
             })
 
         } else {
