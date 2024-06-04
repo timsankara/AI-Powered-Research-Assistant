@@ -107,7 +107,6 @@ const Instruct = () => {
         // get the top 5 similar papers from the database
         let similar_papers = await getSimilarMedicalPapers(embeddings.data[0].embedding)
         setSimilarMedicalPapers(similar_papers)
-        console.log("similar_papers: ", similar_papers)
         // if the user has selected a category then filter the papers by the category
         if (selected_bioarXiv_categories !== []) {
             let filtered_papers = similar_papers.filter(paper => {
@@ -139,8 +138,6 @@ const Instruct = () => {
             let citation = paper.authors + ", “" + paper.title + ",” " + paper.date + ". [Online]. Available: " + paper.item_url || paper.link
             return citation
         })
-        console.log("papers: ", papers)
-        console.log("formatted_papers: ", formatted_papers)
         return formatted_papers
     }
 
@@ -176,7 +173,7 @@ const Instruct = () => {
                                     {/* small toggle switch to setSearchMedical to true */}
                                     <div className="flex flex-wrap justify-center items-center ">
                                         <p className="text-dark text-xs font-bold mr-2">
-                                           Search Health Sciences
+                                            Search Health Sciences
                                         </p>
                                         <input
                                             type="checkbox"
@@ -250,22 +247,23 @@ const Instruct = () => {
                                                             </h4>
                                                             {/* row with 2 columns */}
                                                             <div className="flex flex-wrap text-center">
-                                                                <div className="w-6/12 px-4">
-                                                                    <p className="text-xsm leading-relaxed mt-4 mb-4 text-emerald-500 text-left">
-                                                                        <span className="text-white">Authors: </span>
+                                                                <div className="w-full px-0">
+                                                                <p className="text-xsm text-emerald-500 text-left">
+                                                                        <span className="text-white">Author(s): </span>
                                                                         {paper.authors.split(",")[0]} {paper.authors.split(",").length > 1 &&
                                                                             paper.authors.split(",")[1] + "..."
                                                                         }
                                                                     </p>
-                                                                </div>
-                                                                <div className="w-5/12 px-4">
-                                                                    <p className="text-xsm leading-relaxed mt-4 mb-4 text-emerald-500 text-left">
-                                                                        {paper.similarity.toFixed(2) * 100}%
+                                                                    <p className="text-xsm text-emerald-500 text-left">
+                                                                        {(new Date(paper.date)).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" }).replace(/\//g, "-")}
+                                                                    </p>
+                                                                    <p className="text-xsm text-emerald-500 text-left">
+                                                                        {paper.similarity.toFixed(2) * 100}% similarity
                                                                     </p>
                                                                 </div>
                                                             </div>
-                                                            <p className="text-xsm leading-relaxed mt-4 mb-4 text-white text-left">
-                                                                {paper.abstract.slice(0, 200) + "..."}
+                                                            <p className="text-sm leading-relaxed mt-2 mb-4 text-white text-left">
+                                                                {paper.abstract.slice(0, 400) + "..."}
                                                             </p>
                                                         </div>
                                                     </div>
