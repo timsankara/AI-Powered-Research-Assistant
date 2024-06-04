@@ -248,17 +248,19 @@ const Instruct = () => {
                                                             {/* row with 2 columns */}
                                                             <div className="flex flex-wrap text-center">
                                                                 <div className="w-full px-0">
-                                                                <p className="text-xsm text-emerald-500 text-left">
+                                                                    <p className="text-xsm text-emerald-500 text-left">
                                                                         <span className="text-white">Author(s): </span>
                                                                         {paper.authors.split(",")[0]} {paper.authors.split(",").length > 1 &&
                                                                             paper.authors.split(",")[1] + "..."
                                                                         }
                                                                     </p>
                                                                     <p className="text-xsm text-emerald-500 text-left">
+                                                                        <span className="text-white">Published: </span>
                                                                         {(new Date(paper.date)).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" }).replace(/\//g, "-")}
                                                                     </p>
                                                                     <p className="text-xsm text-emerald-500 text-left">
-                                                                        {paper.similarity.toFixed(2) * 100}% similarity
+                                                                    <span className="text-white">Similarity : </span>
+                                                                        {paper.similarity.toFixed(2) * 100}%
                                                                     </p>
                                                                 </div>
                                                             </div>
