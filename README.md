@@ -1,8 +1,16 @@
-# AI-Powered Research Assistant
+# Scientific Paper Recommender System
 
-This project is a scientific paper recommender that leverages embeddings stored in a DynamoDB table. The embeddings are created using the OpenAI embeddings API. When a user enters a query in the search box, the application compares the query using cosine similarity to the 5 most similar embeddings stored in the database. The application assumes the user already has their own embeddings that they want to compare their query to.
+This project is a scientific paper recommender system designed to help users find relevant research papers based on their queries. The core functionality involves leveraging embeddings, which are stored in a DynamoDB table, to find and recommend papers.
 
-In this example, over 60,000 arXiv papers are stored in DynamoDB. If you need access to this test data, please feel free to reach out.
+## How It Works
+
+- **Embeddings Generation:** Embeddings are created using the OpenAI embeddings API.
+- **Query Processing:** When a user enters a search query, the application compares this query to the stored embeddings using cosine similarity.
+- **Recommendations:** The system identifies and returns the 5 most similar embeddings (and thus papers) from the database.
+- **User Requirements:** It is assumed that users have their own embeddings to compare against those in the database.
+
+In this example, the database contains embeddings for over 60,000 arXiv papers. If you need access to this test data, please reach out.
+
 
 ## Table of Contents
 
